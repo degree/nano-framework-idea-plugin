@@ -1,2 +1,2 @@
-# solid-framework-idea-plugin
+# SOLID Framework IntelliJ IDEA
 
