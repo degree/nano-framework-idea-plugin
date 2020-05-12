@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>by.degree.learn.idea.plugin.solid.framework.solid-framework-idea-plugin</id>
     <name>SOLID Framework Support</name>
-    <vendor email="eugene.dubrovka@gmail.com" url="https://www.degree.by">DeGree.by</vendor>
+    <vendor email="eugene.dubrovka@gmail.com" url="https://www.degree.by">Eugene Dubrovka</vendor>
 
     <description><![CDATA[
     Provides support for SOLID Framework ala Spring-reinvented
@@ -11,9 +11,10 @@
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.properties</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <postStartupActivity implementation="by.degree.learn.idea.plugin.solid.framework.AnnounceFrameworkSupport"/>
     </extensions>
 
     <actions>
