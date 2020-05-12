@@ -2,10 +2,9 @@ package by.degree.learn.idea.plugin.solid.framework
 
 import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.codeInsight.daemon.ImplicitUsageProvider
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiMethod
+import com.intellij.psi.*
 
+const val ANNOTATION_FRAMEWORK_PACKAGE = "by.degree.learn.framework."
 const val ANNOTATION_POST_CONSTRUCT = "by.degree.learn.framework.PostConstruct"
 const val ANNOTATION_INJECT_PROPERTY = "by.degree.learn.framework.InjectProperty"
 const val ANNOTATION_INJECT = "by.degree.learn.framework.Inject"
@@ -25,7 +24,10 @@ class SolidImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitUsage(element: PsiElement): Boolean {
         if (element is PsiMethod) {
             return AnnotationUtil.isAnnotated(element, ANNOTATION_POST_CONSTRUCT, 0)
+        } else if (element is PsiClass) {
+            return element.interfaces.any { psiClass ->  psiClass.qualifiedName?.startsWith(ANNOTATION_FRAMEWORK_PACKAGE) ?: false }
         }
+
         return false
     }
 }
