@@ -15,6 +15,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="by.degree.learn.idea.plugin.solid.framework.AnnounceFrameworkSupport"/>
+        <implicitUsageProvider implementation="by.degree.learn.idea.plugin.solid.framework.SolidImplicitUsageProvider"/>
     </extensions>
 
     <actions>
