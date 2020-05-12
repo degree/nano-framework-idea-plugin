@@ -1,2 +1,0 @@
-# SOLID Framework IntelliJ IDEA
-
