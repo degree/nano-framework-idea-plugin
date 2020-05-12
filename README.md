@@ -1,0 +1,2 @@
+# solid-framework-idea-plugin
+
