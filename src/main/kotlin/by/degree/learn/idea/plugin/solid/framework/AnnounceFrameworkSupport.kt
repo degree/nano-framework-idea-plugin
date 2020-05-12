@@ -11,8 +11,6 @@ import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.ui.awt.RelativePoint
 
-const val FRAMEWORK_CLASS = "by.degree.learn.framework.Application"
-
 class AnnounceFrameworkSupport : StartupActivity {
     override fun runActivity(project: Project) {
         DumbService.getInstance(project).runWhenSmart {
