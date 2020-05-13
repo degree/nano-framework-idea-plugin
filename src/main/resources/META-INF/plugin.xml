@@ -16,6 +16,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="by.degree.learn.idea.plugin.solid.framework.AnnounceFrameworkSupport"/>
         <implicitUsageProvider implementation="by.degree.learn.idea.plugin.solid.framework.SolidImplicitUsageProvider"/>
+        <codeInsight.lineMarkerProvider language="UAST" implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidLineMarkerProvider"/>
     </extensions>
 
     <actions>
