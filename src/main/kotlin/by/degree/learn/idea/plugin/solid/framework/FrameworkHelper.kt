@@ -4,10 +4,14 @@ import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiQualifiedNamedElement
 import com.intellij.psi.search.GlobalSearchScope
 
 object FrameworkHelper {
-    fun isComponent(element: PsiClass): Boolean {
+    fun isComponent(element: PsiClass?): Boolean {
+        if (element == null) {
+            return false
+        }
         val project = element.project
         val javaPsiFacade = JavaPsiFacade.getInstance(project)
         val scope = GlobalSearchScope.allScope(project)
@@ -38,7 +42,7 @@ object FrameworkHelper {
         return inFrameworkPackage(element) || element.interfaces.any(this::inFrameworkPackage)
     }
 
-    fun inFrameworkPackage(psiClass: PsiClass) =
+    fun inFrameworkPackage(psiClass: PsiQualifiedNamedElement) =
         psiClass.qualifiedName?.startsWith(FRAMEWORK_PACKAGE) ?: false
 
 }
