@@ -2,7 +2,10 @@ package by.degree.learn.idea.plugin.solid.framework
 
 import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.codeInsight.daemon.ImplicitUsageProvider
-import com.intellij.psi.*
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiField
+import com.intellij.psi.PsiMethod
 
 class SolidImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitWrite(element: PsiElement): Boolean {
@@ -18,9 +21,10 @@ class SolidImplicitUsageProvider : ImplicitUsageProvider {
         if (element is PsiMethod) {
             return AnnotationUtil.isAnnotated(element, ANT_POST_CONSTRUCT, 0)
         } else if (element is PsiClass) {
-            return element.interfaces.any { psiClass ->  psiClass.qualifiedName?.startsWith(FRAMEWORK_PACKAGE) ?: false }
+            return FrameworkHelper.isPartOfFramework(element) || FrameworkHelper.isComponent(element)
         }
 
         return false
     }
+
 }
