@@ -5,11 +5,10 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder
 import com.intellij.openapi.editor.markup.GutterIconRenderer
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
-import org.jetbrains.uast.UField
-import org.jetbrains.uast.UMethod
-import org.jetbrains.uast.getUParentForIdentifier
+import org.jetbrains.uast.*
 
 class SolidLineMarkerProvider : RelatedItemLineMarkerProvider() {
     override fun collectNavigationMarkers(
@@ -17,18 +16,39 @@ class SolidLineMarkerProvider : RelatedItemLineMarkerProvider() {
         result: MutableCollection<in RelatedItemLineMarkerInfo<PsiElement>>
     ) {
         val uElement = getUParentForIdentifier(element)
-        if (uElement is UMethod && AnnotationUtil.isAnnotated(uElement.javaPsi, ANT_POST_CONSTRUCT, 0)) {
-            result.add(markerFor(element, element))
-        } else if (uElement is UField && uElement.javaPsi is PsiField && AnnotationUtil.isAnnotated(uElement.javaPsi as PsiField, ANTS_INJECT, 0)) {
-            result.add(markerFor(element, element))
-        }
+        if (isPostConstruct(uElement)
+            || isFieldInjection(uElement)
+            || isFramework(uElement)
+            || isComponent(uElement)
+            || isFrameworkCall(uElement)
+        ) result.add(markerFor(element))
     }
 
-    private fun markerFor(element: PsiElement, targets: PsiElement): RelatedItemLineMarkerInfo<PsiElement> {
+    private fun isFrameworkCall(uElement: UElement?) =
+        uElement is UQualifiedReferenceExpression && (uElement.getParentOfType<UCallExpression>()
+            ?.resolve()?.parent as? PsiClass)?.let { FrameworkHelper.inFrameworkPackage(it) } == true
+
+    private fun isComponent(uElement: UElement?) =
+        uElement is UClass && FrameworkHelper.isComponent(uElement.javaPsi)
+
+    private fun isFramework(uElement: UElement?) =
+        uElement is UClass && FrameworkHelper.isPartOfFramework(uElement.javaPsi)
+
+    private fun isFieldInjection(uElement: UElement?) =
+        uElement is UField && uElement.javaPsi is PsiField && AnnotationUtil.isAnnotated(
+            uElement.javaPsi as PsiField,
+            ANTS_INJECT,
+            0
+        )
+
+    private fun isPostConstruct(uElement: UElement?) =
+        uElement is UMethod && AnnotationUtil.isAnnotated(uElement.javaPsi, ANT_POST_CONSTRUCT, 0)
+
+    private fun markerFor(element: PsiElement): RelatedItemLineMarkerInfo<PsiElement> {
         return NavigationGutterIconBuilder
             .create(Icons.GHILL)
             .setAlignment(GutterIconRenderer.Alignment.LEFT)
-            .setTargets(targets)
+            .setTargets(element)
             .createLineMarkerInfo(element)
     }
 }

@@ -34,7 +34,11 @@ object FrameworkHelper {
     private fun hasComponentAnnotation(element: PsiClass) =
         AnnotationUtil.isAnnotated(element, ANT_COMPONENT, 0)
 
-    fun isPartOfFramework(element: PsiClass) =
-        element.interfaces.any { psiClass -> psiClass.qualifiedName?.startsWith(FRAMEWORK_PACKAGE) ?: false }
+    fun isPartOfFramework(element: PsiClass): Boolean {
+        return inFrameworkPackage(element) || element.interfaces.any(this::inFrameworkPackage)
+    }
+
+    fun inFrameworkPackage(psiClass: PsiClass) =
+        psiClass.qualifiedName?.startsWith(FRAMEWORK_PACKAGE) ?: false
 
 }
