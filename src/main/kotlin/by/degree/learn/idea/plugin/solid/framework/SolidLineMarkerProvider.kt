@@ -15,7 +15,7 @@ class SolidLineMarkerProvider : RelatedItemLineMarkerProvider() {
         result: MutableCollection<in RelatedItemLineMarkerInfo<PsiElement>>
     ) {
         val method = getUParentForIdentifier(element)
-        if (method is UMethod && AnnotationUtil.isAnnotated(method.javaPsi, ANNOTATION_POST_CONSTRUCT, 0))
+        if (method is UMethod && AnnotationUtil.isAnnotated(method.javaPsi, ANT_POST_CONSTRUCT, 0))
         {
 
             val marker = NavigationGutterIconBuilder

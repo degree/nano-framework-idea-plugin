@@ -1,10 +1,11 @@
 package by.degree.learn.idea.plugin.solid.framework
 
-const val ANNOTATION_FRAMEWORK_PACKAGE = "by.degree.learn.framework."
-const val FRAMEWORK_CLASS = "by.degree.learn.framework.Application"
-const val ANNOTATION_POST_CONSTRUCT = "by.degree.learn.framework.PostConstruct"
+const val FRAMEWORK_PACKAGE = "by.degree.learn.framework."
+const val FRAMEWORK_CLASS = FRAMEWORK_PACKAGE + "Application"
+const val ANT_POST_CONSTRUCT = FRAMEWORK_PACKAGE + "PostConstruct"
 
-const val ANNOTATION_INJECT_PROPERTY = "by.degree.learn.framework.InjectProperty"
-const val ANNOTATION_INJECT = "by.degree.learn.framework.Inject"
-val ANNOTATIONS_INJECT = listOf(ANNOTATION_INJECT, ANNOTATION_INJECT_PROPERTY)
+const val ANT_INJECT_PROPERTY = FRAMEWORK_PACKAGE + "InjectProperty"
+const val ANT_INJECT = FRAMEWORK_PACKAGE + "Inject"
+
+val ANTS_INJECT = listOf(ANT_INJECT, ANT_INJECT_PROPERTY)
 
