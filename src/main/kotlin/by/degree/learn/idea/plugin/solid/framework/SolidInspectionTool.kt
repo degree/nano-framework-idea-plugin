@@ -1,5 +1,6 @@
 package by.degree.learn.idea.plugin.solid.framework
 
+import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
 import com.intellij.psi.PsiField
 
@@ -28,7 +29,8 @@ class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
             problemsHolder.registerProblem(
                 annotation,
                 "@Component annotation missing",
-                ProblemHighlightType.WARNING
+                ProblemHighlightType.WARNING,
+                AddAnnotationFix(ANT_COMPONENT, field.containingClass!!)
             )
         }
     }
