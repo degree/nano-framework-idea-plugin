@@ -2,6 +2,7 @@ package by.degree.learn.idea.plugin.solid.framework
 
 import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiField
 
 class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
@@ -33,5 +34,23 @@ class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
                 AddAnnotationFix(ANT_COMPONENT, field.containingClass!!)
             )
         }
+    }
+
+    override fun checkClass(
+        aClass: PsiClass,
+        manager: InspectionManager,
+        isOnTheFly: Boolean
+    ): Array<ProblemDescriptor>? {
+        if (!FrameworkHelper.isComponent(aClass) && aClass.interfaces.any(FrameworkHelper::isPartOfFramework)) {
+            val problemsHolder = ProblemsHolder(manager, aClass.containingFile, isOnTheFly)
+            problemsHolder.registerProblem(
+                aClass.identifyingElement!!,
+                "@Component annotation missing",
+                ProblemHighlightType.WARNING,
+                AddAnnotationFix(ANT_COMPONENT, aClass)
+            )
+            return problemsHolder.resultsArray
+        }
+        return ProblemDescriptor.EMPTY_ARRAY
     }
 }
