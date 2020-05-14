@@ -26,7 +26,7 @@ class SolidLineMarkerProvider : RelatedItemLineMarkerProvider() {
 
     private fun isFrameworkCall(uElement: UElement?) =
         uElement is UQualifiedReferenceExpression && (uElement.getParentOfType<UCallExpression>()
-            ?.resolve()?.parent as? PsiClass)?.let { FrameworkHelper.inFrameworkPackage(it) } == true
+            ?.resolve()?.parent as? PsiClass)?.let { FrameworkHelper.isPartOfFramework(it) } == true
 
     private fun isComponent(uElement: UElement?) =
         uElement is UClass && FrameworkHelper.isComponent(uElement.javaPsi)
