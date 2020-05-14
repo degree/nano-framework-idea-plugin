@@ -29,7 +29,7 @@ class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
         if (annotation != null && !FrameworkHelper.isComponent(field.containingClass)) {
             problemsHolder.registerProblem(
                 annotation,
-                "@Component annotation missing",
+                "@Component annotation missing in class with injections",
                 ProblemHighlightType.WARNING,
                 AddAnnotationFix(ANT_COMPONENT, field.containingClass!!)
             )
@@ -45,7 +45,7 @@ class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
             val problemsHolder = ProblemsHolder(manager, aClass.containingFile, isOnTheFly)
             problemsHolder.registerProblem(
                 aClass.identifyingElement!!,
-                "@Component annotation missing",
+                "@Component annotation missing for class implementing framework interface",
                 ProblemHighlightType.WARNING,
                 AddAnnotationFix(ANT_COMPONENT, aClass)
             )
