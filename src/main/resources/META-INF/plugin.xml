@@ -22,7 +22,10 @@
                          groupName="SOLID"
                          enabledByDefault="true"
                          implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidInspectionTool"/>
-
+        <codeInsight.parameterNameHints
+                order="first"
+                language="JAVA"
+                implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidJavaInlayParameterHintsProvider"/>
     </extensions>
 
     <actions>
