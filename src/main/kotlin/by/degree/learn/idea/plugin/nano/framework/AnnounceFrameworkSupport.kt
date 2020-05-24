@@ -20,7 +20,7 @@ class AnnounceFrameworkSupport : StartupActivity {
             if (psi.findClass(FRAMEWORK_CLASS, scope) != null) {
                 val statusBar = WindowManager.getInstance().getStatusBar(project)
                 JBPopupFactory.getInstance()
-                    .createHtmlTextBalloonBuilder("<string>SOLID</strong> Framework found", MessageType.INFO, null)
+                    .createHtmlTextBalloonBuilder("<string>Nano</strong> Framework found", MessageType.INFO, null)
                     .setHideOnCloseClick(true)
                     .createBalloon()
                     .show(RelativePoint.getSouthEastOf(statusBar.component), Balloon.Position.above)

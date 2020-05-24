@@ -4,7 +4,7 @@ import com.intellij.codeInsight.hints.InlayInfo
 import com.intellij.codeInsight.hints.InlayParameterHintsProvider
 import com.intellij.psi.*
 
-class SolidJavaInlayParameterHintsProvider : InlayParameterHintsProvider {
+class JavaInlayParameterHintsProvider : InlayParameterHintsProvider {
     private val blackList = emptySet<String>()
 
     override fun getDefaultBlackList(): Set<String> = blackList

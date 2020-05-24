@@ -1,10 +1,10 @@
 <idea-plugin>
-    <id>by.degree.learn.idea.plugin.nano.framework.solid-framework-idea-plugin</id>
-    <name>SOLID Framework Support</name>
+    <id>by.degree.learn.idea.plugin.nano.framework.nano-framework-idea-plugin</id>
+    <name>Nano Framework Support</name>
     <vendor email="eugene.dubrovka@gmail.com" url="https://www.degree.by">Eugene Dubrovka</vendor>
 
     <description><![CDATA[
-    Provides support for SOLID Framework ala Spring-reinvented
+    Provides support for Nano Framework ala Spring-reinvented
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -15,17 +15,17 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="by.degree.learn.idea.plugin.nano.framework.AnnounceFrameworkSupport"/>
-        <implicitUsageProvider implementation="by.degree.learn.idea.plugin.nano.framework.SolidImplicitUsageProvider"/>
-        <codeInsight.lineMarkerProvider language="UAST" implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidLineMarkerProvider"/>
+        <implicitUsageProvider implementation="by.degree.learn.idea.plugin.nano.framework.ImplicitUsageProvider"/>
+        <codeInsight.lineMarkerProvider language="UAST" implementationClass="by.degree.learn.idea.plugin.nano.framework.LineMarkerProvider"/>
         <localInspection language="JAVA"
                          displayName="@Component annotation missing"
-                         groupName="SOLID"
+                         groupName="Nano"
                          enabledByDefault="true"
-                         implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidInspectionTool"/>
+                         implementationClass="by.degree.learn.idea.plugin.nano.framework.InspectionTool"/>
         <codeInsight.parameterNameHints
                 order="first"
                 language="JAVA"
-                implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidJavaInlayParameterHintsProvider"/>
+                implementationClass="by.degree.learn.idea.plugin.nano.framework.JavaInlayParameterHintsProvider"/>
     </extensions>
 
     <actions>

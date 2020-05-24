@@ -5,7 +5,7 @@ import com.intellij.codeInspection.*
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiField
 
-class SolidInspectionTool : AbstractBaseJavaLocalInspectionTool() {
+class InspectionTool : AbstractBaseJavaLocalInspectionTool() {
     override fun checkField(
         field: PsiField,
         manager: InspectionManager,

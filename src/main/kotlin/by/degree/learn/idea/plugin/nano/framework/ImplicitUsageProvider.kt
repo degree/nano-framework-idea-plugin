@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiMethod
 
-class SolidImplicitUsageProvider : ImplicitUsageProvider {
+class ImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitWrite(element: PsiElement): Boolean {
         if (element is PsiField) {
             return AnnotationUtil.isAnnotated(element, ANTS_INJECT, 0)

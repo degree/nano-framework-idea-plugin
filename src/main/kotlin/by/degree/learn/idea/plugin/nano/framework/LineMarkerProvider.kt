@@ -10,7 +10,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
 import org.jetbrains.uast.*
 
-class SolidLineMarkerProvider : RelatedItemLineMarkerProvider() {
+class LineMarkerProvider : RelatedItemLineMarkerProvider() {
     override fun collectNavigationMarkers(
         element: PsiElement,
         result: MutableCollection<in RelatedItemLineMarkerInfo<PsiElement>>
