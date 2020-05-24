@@ -12,12 +12,23 @@ class SolidJavaInlayParameterHintsProvider : InlayParameterHintsProvider {
     override fun getParameterHints(element: PsiElement): List<InlayInfo> {
         if (element is PsiNameIdentifierOwner) {
             when (element) {
-                is PsiMethod, is PsiClass -> return listOf(InlayInfo("^" + element.name, element.textRange.endOffset, isShowOnlyIfExistedBefore = false, isFilterByBlacklist = false, relatesToPrecedingText = true))
-                is PsiField -> return listOf(InlayInfo("field", element.textRange.endOffset,
-                    isShowOnlyIfExistedBefore = false,
-                    isFilterByBlacklist = false,
-                    relatesToPrecedingText = true
-                ))
+                is PsiMethod, is PsiClass -> return listOf(
+                    InlayInfo(
+                        "^" + element.name,
+                        element.textRange.endOffset,
+                        isShowOnlyIfExistedBefore = false,
+                        isFilterByBlacklist = false,
+                        relatesToPrecedingText = true
+                    )
+                )
+                is PsiField -> return listOf(
+                    InlayInfo(
+                        "field", element.textRange.endOffset,
+                        isShowOnlyIfExistedBefore = false,
+                        isFilterByBlacklist = false,
+                        relatesToPrecedingText = true
+                    )
+                )
             }
         }
         return emptyList()
