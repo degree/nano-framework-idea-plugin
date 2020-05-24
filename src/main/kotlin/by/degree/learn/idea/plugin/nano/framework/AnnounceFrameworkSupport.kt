@@ -1,4 +1,4 @@
-package by.degree.learn.idea.plugin.solid.framework
+package by.degree.learn.idea.plugin.nano.framework
 
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project

@@ -1,4 +1,4 @@
-package by.degree.learn.idea.plugin.solid.framework
+package by.degree.learn.idea.plugin.nano.framework
 
 import com.intellij.codeInsight.hints.InlayInfo
 import com.intellij.codeInsight.hints.InlayParameterHintsProvider

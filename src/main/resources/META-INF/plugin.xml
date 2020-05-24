@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>by.degree.learn.idea.plugin.solid.framework.solid-framework-idea-plugin</id>
+    <id>by.degree.learn.idea.plugin.nano.framework.solid-framework-idea-plugin</id>
     <name>SOLID Framework Support</name>
     <vendor email="eugene.dubrovka@gmail.com" url="https://www.degree.by">Eugene Dubrovka</vendor>
 
@@ -14,18 +14,18 @@
     <depends>com.intellij.properties</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="by.degree.learn.idea.plugin.solid.framework.AnnounceFrameworkSupport"/>
-        <implicitUsageProvider implementation="by.degree.learn.idea.plugin.solid.framework.SolidImplicitUsageProvider"/>
-        <codeInsight.lineMarkerProvider language="UAST" implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidLineMarkerProvider"/>
+        <postStartupActivity implementation="by.degree.learn.idea.plugin.nano.framework.AnnounceFrameworkSupport"/>
+        <implicitUsageProvider implementation="by.degree.learn.idea.plugin.nano.framework.SolidImplicitUsageProvider"/>
+        <codeInsight.lineMarkerProvider language="UAST" implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidLineMarkerProvider"/>
         <localInspection language="JAVA"
                          displayName="@Component annotation missing"
                          groupName="SOLID"
                          enabledByDefault="true"
-                         implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidInspectionTool"/>
+                         implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidInspectionTool"/>
         <codeInsight.parameterNameHints
                 order="first"
                 language="JAVA"
-                implementationClass="by.degree.learn.idea.plugin.solid.framework.SolidJavaInlayParameterHintsProvider"/>
+                implementationClass="by.degree.learn.idea.plugin.nano.framework.SolidJavaInlayParameterHintsProvider"/>
     </extensions>
 
     <actions>

@@ -1,6 +1,6 @@
-package by.degree.learn.idea.plugin.solid.framework
+package by.degree.learn.idea.plugin.nano.framework
 
-const val FRAMEWORK_PACKAGE = "by.degree.learn.solid.framework."
+const val FRAMEWORK_PACKAGE = "by.degree.learn.nano.framework."
 const val FRAMEWORK_CLASS = FRAMEWORK_PACKAGE + "Application"
 
 const val ANT_COMPONENT = FRAMEWORK_PACKAGE + "Component"
