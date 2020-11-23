@@ -11,9 +11,10 @@ import com.intellij.psi.PsiField
 import org.jetbrains.uast.*
 
 class LineMarkerProvider : RelatedItemLineMarkerProvider() {
+
     override fun collectNavigationMarkers(
         element: PsiElement,
-        result: MutableCollection<in RelatedItemLineMarkerInfo<PsiElement>>
+        result: MutableCollection<in RelatedItemLineMarkerInfo<*>>
     ) {
         val uElement = getUParentForIdentifier(element)
         if (isPostConstruct(uElement)
