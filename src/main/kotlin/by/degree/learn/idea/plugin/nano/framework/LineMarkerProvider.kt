@@ -1,6 +1,8 @@
 package by.degree.learn.idea.plugin.nano.framework
 
-import com.intellij.codeInsight.AnnotationUtil
+import by.degree.learn.idea.plugin.nano.framework.FrameworkHelper.isComponent
+import by.degree.learn.idea.plugin.nano.framework.FrameworkHelper.isPartOfFramework
+import com.intellij.codeInsight.AnnotationUtil.isAnnotated
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder
@@ -16,34 +18,37 @@ class LineMarkerProvider : RelatedItemLineMarkerProvider() {
         element: PsiElement,
         result: MutableCollection<in RelatedItemLineMarkerInfo<*>>
     ) {
-        val uElement = getUParentForIdentifier(element)
-        if (isPostConstruct(uElement)
-            || isFieldInjection(uElement)
-            || isFramework(uElement)
-            || isComponent(uElement)
-            || isFrameworkCall(uElement)
+        val e = getUParentForIdentifier(element)
+        if (isPostConstruct(e)
+            || isFieldInjection(e)
+            || isFramework(e)
+            || isComponent(e)
+            || isFrameworkCall(e)
         ) result.add(markerFor(element))
     }
 
-    private fun isFrameworkCall(uElement: UElement?) =
-        uElement is UQualifiedReferenceExpression && (uElement.getParentOfType<UCallExpression>()
-            ?.resolve()?.parent as? PsiClass)?.let { FrameworkHelper.isPartOfFramework(it) } == true
+    private fun isFrameworkCall(element: UElement?): Boolean {
+        return if (element is UQualifiedReferenceExpression) {
+            val cls = element.getParentOfType<UCallExpression>()
+                ?.resolve()
+                ?.parent as? PsiClass
+            cls?.let(FrameworkHelper::isPartOfFramework) == true
+        } else {
+            false
+        }
+    }
 
-    private fun isComponent(uElement: UElement?) =
-        uElement is UClass && FrameworkHelper.isComponent(uElement.javaPsi)
+    private fun isComponent(element: UElement?) = element is UClass && isComponent(element.javaPsi)
 
-    private fun isFramework(uElement: UElement?) =
-        uElement is UClass && FrameworkHelper.isPartOfFramework(uElement.javaPsi)
+    private fun isFramework(element: UElement?) = element is UClass && isPartOfFramework(element.javaPsi)
 
-    private fun isFieldInjection(uElement: UElement?) =
-        uElement is UField && uElement.javaPsi is PsiField && AnnotationUtil.isAnnotated(
-            uElement.javaPsi as PsiField,
-            ANTS_INJECT,
-            0
-        )
+    private fun isFieldInjection(element: UElement?) =
+        element is UField
+                && element.javaPsi is PsiField
+                && isAnnotated(element.javaPsi as PsiField, ANTS_INJECT, 0)
 
-    private fun isPostConstruct(uElement: UElement?) =
-        uElement is UMethod && AnnotationUtil.isAnnotated(uElement.javaPsi, ANT_POST_CONSTRUCT, 0)
+    private fun isPostConstruct(element: UElement?) =
+        element is UMethod && isAnnotated(element.javaPsi, ANT_POST_CONSTRUCT, 0)
 
     private fun markerFor(element: PsiElement): RelatedItemLineMarkerInfo<PsiElement> {
         return NavigationGutterIconBuilder
